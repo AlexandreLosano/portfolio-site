@@ -74,6 +74,25 @@
 
   /* ---------- hero ---------- */
 
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 4px;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: none;
+    border: 2px solid var(--line);
+    box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--copper);
+  }
+
+  .header-top h1 { margin-top: 6px; }
+
   .eyebrow {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
@@ -612,8 +631,13 @@
 <div class="wrap">
 
   <header>
-    <p class="eyebrow">portfolio · homelab</p>
-    <h1>Alexandre Losano</h1>
+    <div class="header-top">
+      <img class="avatar" src="assets/foto-perfil.jpg" alt="Foto de Alexandre Losano" width="88" height="88">
+      <div>
+        <p class="eyebrow">portfolio · homelab</p>
+        <h1>Alexandre Losano</h1>
+      </div>
+    </div>
     <p class="role">engenheiro de dados &mdash; fora do expediente, constrói e hospeda os próprios apps</p>
     <p class="lede">
       No trabalho, constr&oacute;i pipelines &mdash; Airflow, Oracle, Redshift, Databricks. Fora do
