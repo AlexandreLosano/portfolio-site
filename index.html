@@ -461,10 +461,14 @@
   }
 
   #exp-more {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 16px;
     margin-top: 16px;
+  }
+
+  #exp-more:not([hidden]) {
+    display: flex;
   }
 
   /* ---------- education ---------- */
