@@ -1,0 +1,1036 @@
+<title>app_losano</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+  :root {
+    --paper: #eef1ee;
+    --paper-raised: #e2e7e2;
+    --line: #c9d1c8;
+    --ink: #10181a;
+    --ink-2: #10181a;
+    --text-hi: #12201f;
+    --text-mid: #445250;
+    --text-dim: #6f807a;
+    --copper: #b35a26;
+    --copper-strong: #8f4519;
+    --teal: #2f7d72;
+    --card-bg: #f6f7f3;
+    --shadow: 0 1px 0 rgba(16, 24, 26, 0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0d1516;
+      --paper-raised: #121c1d;
+      --line: #23302f;
+      --text-hi: #e7ece9;
+      --text-mid: #a9b7b2;
+      --text-dim: #6f827c;
+      --copper: #e08a4d;
+      --copper-strong: #f0a468;
+      --teal: #5cc2b2;
+      --card-bg: #10191a;
+      --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #0d1516;
+    --paper-raised: #121c1d;
+    --line: #23302f;
+    --text-hi: #e7ece9;
+    --text-mid: #a9b7b2;
+    --text-dim: #6f827c;
+    --copper: #e08a4d;
+    --copper-strong: #f0a468;
+    --teal: #5cc2b2;
+    --card-bg: #10191a;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text-hi);
+    font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    padding-inline: 20px;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding-block: 56px 40px;
+  }
+
+  /* ---------- hero ---------- */
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 22%, transparent);
+    flex: none;
+  }
+
+  h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5vw, 3.3rem);
+    letter-spacing: -0.01em;
+    margin: 14px 0 6px;
+    text-wrap: balance;
+  }
+
+  .role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    color: var(--copper);
+    margin: 0 0 18px;
+  }
+
+  .lede {
+    max-width: 62ch;
+    font-size: 1.08rem;
+    color: var(--text-mid);
+    margin: 0 0 34px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .stat {
+    background: var(--paper-raised);
+    padding: 16px 18px;
+  }
+
+  .stat .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text-hi);
+  }
+
+  .stat .label {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* ---------- section headings ---------- */
+
+  section { margin-top: 68px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .section-head .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .section-head h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .section-head::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ---------- projects ---------- */
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover { transform: translateY(-2px); border-color: var(--copper); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover { border-color: var(--copper); }
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .slug {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .card h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.12rem;
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .card p {
+    margin: 0;
+    color: var(--text-mid);
+    font-size: 0.95rem;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+    background: var(--paper-raised);
+  }
+
+  .card-foot {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .runtime {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+  }
+
+  .repo-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--copper);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .repo-link:hover, .repo-link:focus-visible { color: var(--copper-strong); text-decoration: underline; }
+
+  /* ---------- experience ---------- */
+
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .exp-company {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .exp-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+
+  .exp-head .company-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .exp-head .duration {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .exp-roles {
+    padding: 0 20px;
+  }
+
+  .exp-role {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 6px 20px;
+    padding: 18px 0;
+    border-top: 1px dashed var(--line);
+  }
+
+  .exp-role:first-child { border-top: none; }
+
+  .exp-role .period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--teal);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .exp-role .role-body { min-width: 0; }
+
+  .exp-role .role-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin: 0 0 4px;
+  }
+
+  .exp-role .role-loc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0 0 10px;
+  }
+
+  .exp-role ul {
+    margin: 0 0 12px;
+    padding-left: 18px;
+    color: var(--text-mid);
+    font-size: 0.92rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .exp-role .role-highlight {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    border-left: 2px solid var(--copper);
+    padding-left: 10px;
+    margin: 0 0 12px;
+  }
+
+  .exp-role .role-highlight strong {
+    color: var(--text-hi);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 560px) {
+    .exp-role {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+
+  .exp-more-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: var(--paper-raised);
+    border: 1px dashed var(--line);
+    color: var(--text-mid);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    padding: 12px 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .exp-more-btn::before {
+    content: "+ ";
+    color: var(--copper);
+  }
+
+  .exp-more-btn[aria-expanded="true"]::before {
+    content: "− ";
+  }
+
+  .exp-more-btn:hover, .exp-more-btn:focus-visible {
+    border-color: var(--copper);
+    color: var(--text-hi);
+  }
+
+  .exp-more-count {
+    color: var(--text-dim);
+    font-size: 0.76rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 560px) {
+    .exp-more-count { display: none; }
+  }
+
+  #exp-more {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  /* ---------- education ---------- */
+
+  .edu-grid {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .edu-item {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 6px 20px;
+    padding: 16px 20px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .edu-item:first-child { border-top: none; }
+
+  .edu-period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--teal);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .edu-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin: 0 0 3px;
+  }
+
+  .edu-inst {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    margin: 0;
+  }
+
+  @media (max-width: 560px) {
+    .edu-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .cert-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cert-card:hover { transform: translateY(-2px); border-color: var(--copper); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cert-card:hover { border-color: var(--copper); }
+  }
+
+  .cert-card img {
+    width: 52px;
+    height: 52px;
+    flex: none;
+    object-fit: contain;
+  }
+
+  .cert-card .cert-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.86rem;
+    line-height: 1.3;
+    margin: 0 0 3px;
+  }
+
+  .cert-card .cert-meta {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  /* ---------- about ---------- */
+
+  .about {
+    max-width: 66ch;
+    font-size: 1.02rem;
+    color: var(--text-mid);
+  }
+
+  .about strong { color: var(--text-hi); font-weight: 600; }
+
+  .about code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88em;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    padding: 1px 5px;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    margin-top: 76px;
+    padding-block: 26px 14px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  footer .who .name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+
+  footer .who .tagline {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 3px;
+  }
+
+  footer .links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+  }
+
+  footer .links a { text-decoration: none; }
+  footer .links a:hover, footer .links a:focus-visible { color: var(--copper); }
+
+  .eof {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-top: 24px;
+    letter-spacing: 0.04em;
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">portfolio · homelab</p>
+    <h1>Alexandre Losano</h1>
+    <p class="role">engenheiro de dados &mdash; fora do expediente, constrói e hospeda os próprios apps</p>
+    <p class="lede">
+      No trabalho, constr&oacute;i pipelines &mdash; Airflow, Oracle, Redshift, Databricks. Fora do
+      expediente, cada ideia vira um servi&ccedil;o com seu pr&oacute;prio <code class="mono">docker-compose.yml</code>:
+      React e TypeScript na interface, Node por tr&aacute;s, Postgres ou Mongo guardando o estado,
+      tudo rodando no pr&oacute;prio home lab.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="n">07</div>
+        <div class="label">projetos publicados</div>
+      </div>
+      <div class="stat">
+        <div class="n">PokéAPI</div>
+        <div class="label">consumida em 2 projetos</div>
+      </div>
+      <div class="stat">
+        <div class="n">docker compose up -d</div>
+        <div class="label">comando mais digitado</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="experiencia">
+    <div class="section-head">
+      <span class="tag">./experiencia</span>
+      <h2>trajetória profissional</h2>
+    </div>
+
+    <div class="exp-list">
+
+      <article class="exp-company">
+        <div class="exp-head">
+          <span class="company-name mono">Hospital Sírio-Libanês</span>
+          <span class="duration">9 anos 9 meses</span>
+        </div>
+        <div class="exp-roles">
+
+          <div class="exp-role">
+            <span class="period">jul/2025 &ndash; atual</span>
+            <div class="role-body">
+              <h3 class="role-title">Engenheiro de Dados</h3>
+              <p class="role-loc">São Paulo, Brasil &middot; híbrido</p>
+              <ul>
+                <li>Camada de dados do produto Command Center: dados near-real-time para os painéis de decis&atilde;o da equipe de Gest&atilde;o de Leitos, em parceria com o time full-stack</li>
+                <li>Pipelines via engenharia reversa e BDD sobre Oracle, Redshift e Databricks</li>
+                <li>Queries e DAGs no Airflow, versionadas com Git e vinculadas ao Azure DevOps</li>
+              </ul>
+              <p class="role-highlight"><strong>Destaques:</strong> refez a camada de dados do Command Center reduzindo custos; migrou o Airflow de 1.10 pra 2.10, refatorando as DAGs e dimensionando uma inst&acirc;ncia EC2 sob medida &mdash; mais economia e poder de execu&ccedil;&atilde;o.</p>
+              <div class="pills">
+                <span class="pill">Oracle</span><span class="pill">Redshift</span><span class="pill">Databricks</span><span class="pill">Apache Airflow</span><span class="pill">AWS</span><span class="pill">Azure DevOps</span><span class="pill">Git</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-role">
+            <span class="period">nov/2020 &ndash; jun/2025</span>
+            <div class="role-body">
+              <h3 class="role-title">Analista de Informações Gerenciais PL</h3>
+              <ul>
+                <li>Relatórios e indicadores de resultado para a diretoria, com dashboards em Power BI (arquivos, SharePoint, Redshift)</li>
+                <li>Apoio à elabora&ccedil;&atilde;o de or&ccedil;amento e relat&oacute;rios de custo/desvio</li>
+                <li>Transi&ccedil;&atilde;o gradual pra engenharia de dados: queries e DAGs no Airflow sobre Oracle/Redshift</li>
+              </ul>
+              <div class="pills">
+                <span class="pill">Power BI</span><span class="pill">Oracle</span><span class="pill">Redshift</span><span class="pill">Apache Airflow</span><span class="pill">Excel/VBA</span><span class="pill">SharePoint</span><span class="pill">NoSQL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-role">
+            <span class="period">jan/2017 &ndash; nov/2020</span>
+            <div class="role-body">
+              <h3 class="role-title">Analista de Contas a Receber</h3>
+              <ul>
+                <li>Fechamento cont&aacute;bil e gerencial</li>
+                <li>Ferramentas em Excel/VBA e minera&ccedil;&atilde;o de dados com SQL</li>
+              </ul>
+              <div class="pills">
+                <span class="pill">Tasy</span><span class="pill">Excel/VBA</span><span class="pill">SQL</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <button type="button" class="exp-more-btn" id="exp-more-btn" aria-expanded="false" aria-controls="exp-more">
+        <span id="exp-more-btn-label">ver experiências anteriores</span>
+        <span class="exp-more-count">DIA Brasil · TNT Express · Livraria Saraiva</span>
+      </button>
+
+      <div id="exp-more" hidden>
+
+      <article class="exp-company">
+        <div class="exp-head">
+          <span class="company-name mono">DIA Brasil</span>
+          <span class="duration">2 anos 8 meses</span>
+        </div>
+        <div class="exp-roles">
+
+          <div class="exp-role">
+            <span class="period">abr/2014 &ndash; nov/2016</span>
+            <div class="role-body">
+              <h3 class="role-title">Analista de Planejamento</h3>
+              <p class="role-loc">São Paulo, SP</p>
+              <ul>
+                <li>Consultas e relat&oacute;rios gerenciais sobre o AS400 de reposi&ccedil;&atilde;o dos Centros de Distribui&ccedil;&atilde;o</li>
+                <li>Relat&oacute;rios em tempo real: previs&atilde;o de consumo por artigo e acompanhamento de promo&ccedil;&otilde;es semanais</li>
+              </ul>
+              <div class="pills">
+                <span class="pill">AS400</span><span class="pill">Access</span><span class="pill">SQL</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <article class="exp-company">
+        <div class="exp-head">
+          <span class="company-name mono">TNT Express</span>
+          <span class="duration">2 anos 11 meses</span>
+        </div>
+        <div class="exp-roles">
+
+          <div class="exp-role">
+            <span class="period">mai/2012 &ndash; nov/2013</span>
+            <div class="role-body">
+              <h3 class="role-title">Analista Comercial</h3>
+              <ul>
+                <li>Relat&oacute;rios de KPI, Real x Budget e Top 10 clientes por semana</li>
+                <li>Precifica&ccedil;&atilde;o de fretes: tabelas fixas/especiais, cota&ccedil;&atilde;o Spot e reajuste anual, do c&aacute;lculo ao comunicado ao cliente</li>
+              </ul>
+              <div class="pills">
+                <span class="pill">Excel</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-role">
+            <span class="period">jan/2011 &ndash; abr/2012</span>
+            <div class="role-body">
+              <h3 class="role-title">Assistente de Marketing</h3>
+              <ul>
+                <li>Pesquisa com clientes e estudos de mercado/potencial por regi&atilde;o</li>
+              </ul>
+              <div class="pills">
+                <span class="pill">Excel</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <article class="exp-company">
+        <div class="exp-head">
+          <span class="company-name mono">Livraria Saraiva</span>
+          <span class="duration">2 anos &middot; estágio</span>
+        </div>
+        <div class="exp-roles">
+
+          <div class="exp-role">
+            <span class="period">jan/2009 &ndash; dez/2010</span>
+            <div class="role-body">
+              <h3 class="role-title">Estagi&aacute;rio de TI</h3>
+              <p class="role-loc">São Paulo, Brasil</p>
+              <ul>
+                <li>1&ordm; ano: inserts em banco de dados e relat&oacute;rios gerenciais pra &aacute;rea de log&iacute;stica</li>
+                <li>2&ordm; ano: e-commerce &mdash; pesquisa de concorr&ecirc;ncia e relat&oacute;rios de resultado</li>
+              </ul>
+              <div class="pills">
+                <span class="pill">SQL</span><span class="pill">Excel</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="formacao">
+    <div class="section-head">
+      <span class="tag">./formação</span>
+      <h2>educação &amp; certificações</h2>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-item">
+        <span class="edu-period mono">2008 &ndash; 2011</span>
+        <div>
+          <h3 class="edu-title">Bacharelado em Estatística</h3>
+          <p class="edu-inst">Centro Universitário Capital</p>
+        </div>
+      </div>
+      <div class="edu-item">
+        <span class="edu-period mono">2020 &ndash; 2021</span>
+        <div>
+          <h3 class="edu-title">Pós-graduação em Big Data</h3>
+          <p class="edu-inst">Universidade Presbiteriana Mackenzie</p>
+        </div>
+      </div>
+      <div class="edu-item">
+        <span class="edu-period mono">2024 &ndash; 2026</span>
+        <div>
+          <h3 class="edu-title">Tecnólogo em Banco de Dados</h3>
+          <p class="edu-inst">Estácio</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-grid">
+      <a class="cert-card" href="https://www.credly.com/badges/1acfaaff-3692-4038-b60b-dd048d791b0c" target="_blank" rel="noopener">
+        <img src="assets/badges/aws-cloud-practitioner.png" alt="" loading="lazy">
+        <div>
+          <p class="cert-name">AWS Certified Cloud Practitioner</p>
+          <p class="cert-meta">Amazon Web Services &middot; mai/2024</p>
+        </div>
+      </a>
+      <a class="cert-card" href="https://www.credly.com/badges/51dc2a1f-6333-4a2a-be03-9adca60d2349" target="_blank" rel="noopener">
+        <img src="assets/badges/aws-immersion-day.png" alt="" loading="lazy">
+        <div>
+          <p class="cert-name">AWS General Immersion Day Participant</p>
+          <p class="cert-meta">AWS WWCS Solution Architect &middot; abr/2024</p>
+        </div>
+      </a>
+      <a class="cert-card" href="https://www.credly.com/badges/ce7271b6-1613-4687-bc00-c779536c033c" target="_blank" rel="noopener">
+        <img src="assets/badges/excel-expert.png" alt="" loading="lazy">
+        <div>
+          <p class="cert-name">Microsoft Office Specialist: Excel Expert</p>
+          <p class="cert-meta">Microsoft &middot; Office 2019 &middot; jan/2022</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="dados">
+    <div class="section-head">
+      <span class="tag">./dados</span>
+      <h2>engenharia de dados</h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_airflow3/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Airflow 3 &mdash; Ambiente Institucional</h3>
+        <p>Stack Docker do Apache Airflow 3.3.1 com CeleryExecutor: apiserver, scheduler, dag-processor, triggerer e worker cada um no seu pr&oacute;prio container, Postgres como banco de metadados e Redis como broker. Fernet key, JWT secret e credenciais sempre gerados por vari&aacute;vel de ambiente &mdash; nada fixo no c&oacute;digo.</p>
+        <div class="pills">
+          <span class="pill">Apache Airflow</span><span class="pill">Python</span><span class="pill">PostgreSQL</span><span class="pill">Redis</span><span class="pill">Celery</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose &middot; porta 8080</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_airflow3" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">ser_grafana/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Observabilidade &mdash; Grafana</h3>
+        <p>Dashboards e datasources do Grafana versionados como c&oacute;digo (provisioning): Prometheus como fonte de m&eacute;tricas e um dashboard dedicado a acompanhar o ambiente Airflow.</p>
+        <div class="pills">
+          <span class="pill">Grafana</span><span class="pill">Prometheus</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose &middot; porta 4000</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/ser_grafana" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="section-head">
+      <span class="tag">./homelab</span>
+      <h2>projetos pessoais</h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_pokemon/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Pok&eacute;mon Explorer</h3>
+        <p>Explorador 100% est&aacute;tico &mdash; sem build, sem servidor &mdash; consumindo a PokéAPI direto do navegador. Fichas por gera&ccedil;&atilde;o e jogo, calculadora de efetividade dual-type e montagem de time com efetividade combinada.</p>
+        <div class="pills">
+          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript vanilla</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">est&aacute;tico &middot; abre o index.html</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_pokemon" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_tcg-pokemon/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Living Dex &mdash; TCG Pok&eacute;mon</h3>
+        <p>Fich&aacute;rio digital para uma cole&ccedil;&atilde;o f&iacute;sica de cartas: uma carta por forma colecion&aacute;vel, cruzando a PokéAPI com a Pok&eacute;mon TCG API. Fich&aacute;rios f&iacute;sicos com posi&ccedil;&atilde;o em grade 3&times;3, status por forma, gr&aacute;ficos de progresso.</p>
+        <div class="pills">
+          <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Node/Express</span><span class="pill">PostgreSQL</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose &middot; porta 25173</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_tcg-pokemon" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_idle/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Idle Miner Tycoon &mdash; Tracker</h3>
+        <p>Painel para o jogo Idle Miner Tycoon: produ&ccedil;&atilde;o, pr&oacute;ximo prest&iacute;gio e gargalo de extra&ccedil;&atilde;o por ilha, simulador de pacotes promocionais e a nota&ccedil;&atilde;o de ordem de grandeza do pr&oacute;prio jogo (k, m, b &hellip; at&eacute; 10&sup7;&sup8;).</p>
+        <div class="pills">
+          <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Node/Express</span><span class="pill">PostgreSQL</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_idle" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_reddit/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Reddit Visual Viewer</h3>
+        <p>Visualizador de posts do Reddit focado em imagem e v&iacute;deo, com lista de subreddits favoritos e visibilidade configur&aacute;vel por subreddit, persistida em MySQL.</p>
+        <div class="pills">
+          <span class="pill">Node</span><span class="pill">MySQL</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose &middot; porta 3333</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_reddit" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_serverhub/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Server Hub</h3>
+        <p>Central de links pessoal para organizar o pr&oacute;prio home lab: categorias, tags, busca com debounce e tema claro / escuro / autom&aacute;tico.</p>
+        <div class="pills">
+          <span class="pill">React</span><span class="pill">Tailwind</span><span class="pill">Node/Express</span><span class="pill">MongoDB</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_serverhub" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="section-head">
+      <span class="tag">./sobre</span>
+      <h2>como eu trabalho</h2>
+    </div>
+    <p class="about">
+      No trabalho, busco sempre a op&ccedil;&atilde;o mais adequada para a empresa: velocidade,
+      veracidade dos dados, confiabilidade e economia. Os projetos pessoais funcionam como um
+      laborat&oacute;rio, servindo para o teste de ideias e a constru&ccedil;&atilde;o de
+      ferramentas com tecnologias conhecidas para resolver um problema de forma pr&aacute;tica e
+      que envolva o estudo cont&iacute;nuo, com o objetivo de desenvolver novos racioc&iacute;nios
+      e a descoberta de novos caminhos e tecnologias.
+    </p>
+  </section>
+
+  <footer>
+    <div class="who">
+      <div class="name mono">Alexandre Losano</div>
+      <div class="tagline">constru&iacute;do sobre docker-compose.yml</div>
+    </div>
+    <div class="links">
+      <a href="mailto:alexandrelosano@gmail.com">alexandrelosano@gmail.com</a>
+      <a href="https://github.com/AlexandreLosano" target="_blank" rel="noopener">github.com/AlexandreLosano</a>
+    </div>
+  </footer>
+
+  <p class="eof">// EOF &middot; publicado a partir do pr&oacute;prio VPS</p>
+
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('exp-more-btn');
+    var label = document.getElementById('exp-more-btn-label');
+    var panel = document.getElementById('exp-more');
+    if (!btn || !panel) return;
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+      label.textContent = expanded ? 'ver experiências anteriores' : 'ocultar experiências anteriores';
+    });
+  })();
+</script>
