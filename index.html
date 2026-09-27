@@ -1,725 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portifólio - Alexandre Losano</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
-
-  :root {
-    --paper: #eef1ee;
-    --paper-raised: #e2e7e2;
-    --line: #c9d1c8;
-    --ink: #10181a;
-    --ink-2: #10181a;
-    --text-hi: #12201f;
-    --text-mid: #445250;
-    --text-dim: #6f807a;
-    --copper: #b35a26;
-    --copper-strong: #8f4519;
-    --teal: #2f7d72;
-    --card-bg: #f6f7f3;
-    --shadow: 0 1px 0 rgba(16, 24, 26, 0.06);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #0d1516;
-      --paper-raised: #121c1d;
-      --line: #23302f;
-      --text-hi: #e7ece9;
-      --text-mid: #a9b7b2;
-      --text-dim: #6f827c;
-      --copper: #e08a4d;
-      --copper-strong: #f0a468;
-      --teal: #5cc2b2;
-      --card-bg: #10191a;
-      --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-    }
-  }
-
-  :root[data-theme="dark"] {
-    --paper: #0d1516;
-    --paper-raised: #121c1d;
-    --line: #23302f;
-    --text-hi: #e7ece9;
-    --text-mid: #a9b7b2;
-    --text-dim: #6f827c;
-    --copper: #e08a4d;
-    --copper-strong: #f0a468;
-    --teal: #5cc2b2;
-    --card-bg: #10191a;
-    --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--text-hi);
-    font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
-    line-height: 1.55;
-    padding-inline: 20px;
-  }
-
-  .mono {
-    font-family: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-  }
-
-  a { color: inherit; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
-
-  .wrap {
-    max-width: 980px;
-    margin: 0 auto;
-    padding-block: 56px 40px;
-  }
-
-  /* ---------- hero ---------- */
-
-  .header-top {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 4px;
-  }
-
-  .avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex: none;
-    border: 2px solid var(--line);
-    box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--copper);
-  }
-
-  .header-top h1 { margin-top: 6px; }
-
-  .eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .eyebrow::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--teal);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 22%, transparent);
-    flex: none;
-  }
-
-  h1 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 700;
-    font-size: clamp(2.1rem, 5vw, 3.3rem);
-    letter-spacing: -0.01em;
-    margin: 14px 0 6px;
-    text-wrap: balance;
-  }
-
-  .role {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1rem;
-    color: var(--copper);
-    margin: 0 0 18px;
-  }
-
-  .lede {
-    max-width: 62ch;
-    font-size: 1.08rem;
-    color: var(--text-mid);
-    margin: 0 0 34px;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-  }
-
-  .stat {
-    background: var(--paper-raised);
-    padding: 16px 18px;
-  }
-
-  .stat .n {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: var(--text-hi);
-  }
-
-  .stat .label {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  /* ---------- section headings ---------- */
-
-  section { margin-top: 68px; }
-
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 22px;
-  }
-
-  .section-head .tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  .section-head h2 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .section-head::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-
-  /* ---------- projects ---------- */
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 18px;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-    padding: 22px 22px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: border-color 0.15s ease, transform 0.15s ease;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .card:hover { transform: translateY(-2px); border-color: var(--copper); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .card:hover { border-color: var(--copper); }
-  }
-
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .slug {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-dim);
-  }
-
-  .status {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--teal);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-  }
-
-  .status::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--teal);
-  }
-
-  .card h3 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.12rem;
-    font-weight: 600;
-    margin: 0;
-    text-wrap: balance;
-  }
-
-  .card p {
-    margin: 0;
-    color: var(--text-mid);
-    font-size: 0.95rem;
-  }
-
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 2px;
-  }
-
-  .pill {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-mid);
-    border: 1px solid var(--line);
-    padding: 3px 8px;
-    background: var(--paper-raised);
-  }
-
-  .card-foot {
-    margin-top: auto;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .runtime {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.76rem;
-    color: var(--text-dim);
-  }
-
-  .repo-link {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--copper);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .repo-link:hover, .repo-link:focus-visible { color: var(--copper-strong); text-decoration: underline; }
-
-  /* ---------- experience ---------- */
-
-  .exp-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .exp-company {
-    background: var(--card-bg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-  }
-
-  .exp-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--line);
-    flex-wrap: wrap;
-  }
-
-  .exp-head .company-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 1.05rem;
-  }
-
-  .exp-head .duration {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-dim);
-  }
-
-  .exp-roles {
-    padding: 0 20px;
-  }
-
-  .exp-role {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 6px 20px;
-    padding: 18px 0;
-    border-top: 1px dashed var(--line);
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-  }
-
-  .exp-role:first-child { border-top: none; }
-
-  .exp-role:hover, .exp-role:focus-visible {
-    background: var(--paper-raised);
-    outline: none;
-  }
-
-  .exp-role .role-title::after {
-    content: "→ detalhes";
-    margin-left: 10px;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 500;
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    opacity: 0;
-    transition: opacity 0.15s ease, color 0.15s ease;
-  }
-
-  .exp-role:hover .role-title::after,
-  .exp-role:focus-visible .role-title::after {
-    opacity: 1;
-    color: var(--copper);
-  }
-
-  /* ---------- modal ---------- */
-
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(16, 24, 26, 0.55);
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 60px 20px;
-    overflow-y: auto;
-    z-index: 100;
-  }
-
-  .modal-overlay[hidden] { display: none; }
-
-  .modal-box {
-    position: relative;
-    background: var(--card-bg);
-    border: 1px solid var(--line);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-    max-width: 600px;
-    width: 100%;
-    padding: 30px 26px 26px;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    background: none;
-    border: 1px solid var(--line);
-    color: var(--text-mid);
-    font-size: 1.1rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .modal-close:hover, .modal-close:focus-visible {
-    border-color: var(--copper);
-    color: var(--text-hi);
-  }
-
-  .modal-meta {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
-    margin: 0 0 16px;
-  }
-
-  .exp-role .period {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--teal);
-    white-space: nowrap;
-    padding-top: 2px;
-  }
-
-  .exp-role .role-body { min-width: 0; }
-
-  .role-body .role-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 0.98rem;
-    margin: 0 0 4px;
-  }
-
-  .role-body .role-loc {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    margin: 0 0 10px;
-  }
-
-  .role-body ul {
-    margin: 0 0 12px;
-    padding-left: 18px;
-    color: var(--text-mid);
-    font-size: 0.92rem;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .role-highlight {
-    font-size: 0.9rem;
-    color: var(--text-mid);
-    border-left: 2px solid var(--copper);
-    padding-left: 10px;
-    margin: 0 0 12px;
-  }
-
-  .role-highlight strong {
-    color: var(--text-hi);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  /* Na listagem, só período + cargo aparecem — local, bullets, destaques
-     e pills moram no modal, clonado do mesmo .role-body. */
-  .exp-role .role-body .role-loc,
-  .exp-role .role-body ul,
-  .exp-role .role-body .role-highlight,
-  .exp-role .role-body .pills {
-    display: none;
-  }
-
-  @media (max-width: 560px) {
-    .exp-role {
-      grid-template-columns: 1fr;
-      gap: 4px;
-    }
-  }
-
-  .exp-more-btn {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    background: var(--paper-raised);
-    border: 1px dashed var(--line);
-    color: var(--text-mid);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
-    padding: 12px 18px;
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .exp-more-btn::before {
-    content: "+ ";
-    color: var(--copper);
-  }
-
-  .exp-more-btn[aria-expanded="true"]::before {
-    content: "− ";
-  }
-
-  .exp-more-btn:hover, .exp-more-btn:focus-visible {
-    border-color: var(--copper);
-    color: var(--text-hi);
-  }
-
-  .exp-more-count {
-    color: var(--text-dim);
-    font-size: 0.76rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  @media (max-width: 560px) {
-    .exp-more-count { display: none; }
-  }
-
-  #exp-more {
-    display: none;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
-  }
-
-  #exp-more:not([hidden]) {
-    display: flex;
-  }
-
-  /* ---------- education ---------- */
-
-  .edu-grid {
-    display: flex;
-    flex-direction: column;
-    background: var(--card-bg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-  }
-
-  .edu-item {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 6px 20px;
-    padding: 16px 20px;
-    border-top: 1px dashed var(--line);
-  }
-
-  .edu-item:first-child { border-top: none; }
-
-  .edu-period {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--teal);
-    white-space: nowrap;
-    padding-top: 2px;
-  }
-
-  .edu-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 0.98rem;
-    margin: 0 0 3px;
-  }
-
-  .edu-inst {
-    font-size: 0.88rem;
-    color: var(--text-mid);
-    margin: 0;
-  }
-
-  @media (max-width: 560px) {
-    .edu-item {
-      grid-template-columns: 1fr;
-      gap: 4px;
-    }
-  }
-
-  .cert-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .cert-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--card-bg);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-    padding: 14px 16px;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.15s ease, transform 0.15s ease;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .cert-card:hover { transform: translateY(-2px); border-color: var(--copper); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cert-card:hover { border-color: var(--copper); }
-  }
-
-  .cert-card img {
-    width: 52px;
-    height: 52px;
-    flex: none;
-    object-fit: contain;
-  }
-
-  .cert-card .cert-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 0.86rem;
-    line-height: 1.3;
-    margin: 0 0 3px;
-  }
-
-  .cert-card .cert-meta {
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    margin: 0;
-  }
-
-  /* ---------- about ---------- */
-
-  .about {
-    max-width: 66ch;
-    font-size: 1.02rem;
-    color: var(--text-mid);
-  }
-
-  .about strong { color: var(--text-hi); font-weight: 600; }
-
-  .about code {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.88em;
-    background: var(--paper-raised);
-    border: 1px solid var(--line);
-    padding: 1px 5px;
-  }
-
-  /* ---------- footer ---------- */
-
-  footer {
-    margin-top: 76px;
-    padding-block: 26px 14px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 18px;
-  }
-
-  footer .who .name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 0.98rem;
-  }
-
-  footer .who .tagline {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin-top: 3px;
-  }
-
-  footer .links {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.88rem;
-  }
-
-  footer .links a { text-decoration: none; }
-  footer .links a:hover, footer .links a:focus-visible { color: var(--copper); }
-
-  .eof {
-    text-align: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    margin-top: 24px;
-    letter-spacing: 0.04em;
-  }
-</style>
+<meta name="description" content="Portfólio pessoal de Alexandre Losano, engenheiro de dados — trajetória profissional, projetos de homelab e experimentos com Airflow, dbt e observabilidade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/experience.css">
+<link rel="stylesheet" href="css/modal.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/education.css">
+<link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
 
 <div class="wrap">
 
@@ -727,14 +25,14 @@
     <div class="header-top">
       <img class="avatar" src="assets/foto-perfil.jpg" alt="Foto de Alexandre Losano" width="88" height="88">
       <div>
-        <p class="eyebrow">portfolio · homelab</p>
+        <p class="eyebrow">Portfólio &middot; homelab</p>
         <h1>Alexandre Losano</h1>
       </div>
     </div>
     <p class="role">engenheiro de dados &mdash; fora do expediente, constrói e hospeda os próprios apps</p>
     <p class="lede">
       No trabalho, constr&oacute;i pipelines &mdash; Airflow, Python, Oracle, Redshift, Databricks. Fora do
-      expediente, cada ideia vira um servi&ccedil;o com seu pr&oacute;prio <code class="mono">docker-compose.yml</code>:
+      expediente, cada ideia vira um servi&ccedil;o com seu pr&oacute;prio <code>docker-compose.yml</code>:
       React e TypeScript na interface, Node por tr&aacute;s, Postgres ou Mongo guardando o estado,
       tudo rodando no pr&oacute;prio home lab.
     </p>
@@ -749,7 +47,7 @@
         <div class="label">consumida em 2 projetos</div>
       </div>
       <div class="stat">
-        <div class="n">docker compose up -d</div>
+        <div class="n mono">docker compose up -d</div>
         <div class="label">comando mais digitado</div>
       </div>
     </div>
@@ -757,7 +55,7 @@
 
   <section id="experiencia">
     <div class="section-head">
-      <span class="tag">./experiencia</span>
+      <span class="section-num">01</span>
       <h2>trajetória profissional</h2>
     </div>
 
@@ -765,7 +63,7 @@
 
       <article class="exp-company">
         <div class="exp-head">
-          <span class="company-name mono">Hospital Sírio-Libanês</span>
+          <span class="company-name">Hospital Sírio-Libanês</span>
           <span class="duration">9 anos 9 meses</span>
         </div>
         <div class="exp-roles">
@@ -829,7 +127,7 @@
 
       <article class="exp-company">
         <div class="exp-head">
-          <span class="company-name mono">DIA Brasil</span>
+          <span class="company-name">DIA Brasil</span>
           <span class="duration">2 anos 8 meses</span>
         </div>
         <div class="exp-roles">
@@ -854,7 +152,7 @@
 
       <article class="exp-company">
         <div class="exp-head">
-          <span class="company-name mono">TNT Express</span>
+          <span class="company-name">TNT Express</span>
           <span class="duration">2 anos 11 meses</span>
         </div>
         <div class="exp-roles">
@@ -891,7 +189,7 @@
 
       <article class="exp-company">
         <div class="exp-head">
-          <span class="company-name mono">Livraria Saraiva</span>
+          <span class="company-name">Livraria Saraiva</span>
           <span class="duration">2 anos &middot; estágio</span>
         </div>
         <div class="exp-roles">
@@ -921,27 +219,27 @@
 
   <section id="formacao">
     <div class="section-head">
-      <span class="tag">./formação</span>
+      <span class="section-num">02</span>
       <h2>educação &amp; certificações</h2>
     </div>
 
     <div class="edu-grid">
       <div class="edu-item">
-        <span class="edu-period mono">2008 &ndash; 2011</span>
+        <span class="edu-period">2008 &ndash; 2011</span>
         <div>
           <h3 class="edu-title">Bacharelado em Estatística</h3>
           <p class="edu-inst">Centro Universitário Capital</p>
         </div>
       </div>
       <div class="edu-item">
-        <span class="edu-period mono">2020 &ndash; 2021</span>
+        <span class="edu-period">2020 &ndash; 2021</span>
         <div>
           <h3 class="edu-title">Pós-graduação em Big Data</h3>
           <p class="edu-inst">Universidade Presbiteriana Mackenzie</p>
         </div>
       </div>
       <div class="edu-item">
-        <span class="edu-period mono">2024 &ndash; 2026</span>
+        <span class="edu-period">2024 &ndash; 2026</span>
         <div>
           <h3 class="edu-title">Tecnólogo em Banco de Dados</h3>
           <p class="edu-inst">Estácio</p>
@@ -976,7 +274,7 @@
 
   <section id="dados">
     <div class="section-head">
-      <span class="tag">./dados</span>
+      <span class="section-num">03</span>
       <h2>engenharia de dados</h2>
     </div>
 
@@ -984,8 +282,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_airflow3/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_airflow3/</span>
         </div>
         <h3>Airflow 3 &mdash; Ambiente Institucional</h3>
         <p>Stack Docker do Apache Airflow 3.3.1 com CeleryExecutor: apiserver, scheduler, dag-processor, triggerer e worker cada um no seu pr&oacute;prio container, Postgres como banco de metadados e Redis como broker. Fernet key, JWT secret e credenciais sempre gerados por vari&aacute;vel de ambiente &mdash; nada fixo no c&oacute;digo.</p>
@@ -1000,8 +297,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">ser_grafana/</span>
-          <span class="status">up · público</span>
+          <span class="slug">ser_grafana/</span>
         </div>
         <h3>Observabilidade &mdash; Grafana</h3>
         <p>Dashboards e datasources do Grafana versionados como c&oacute;digo (provisioning): Prometheus como fonte de m&eacute;tricas e um dashboard dedicado a acompanhar o ambiente Airflow.</p>
@@ -1016,8 +312,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_dbt/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_dbt/</span>
         </div>
         <h3>Estudo de dbt</h3>
         <p>Seed de vendas fict&iacute;cia transformada em camadas staging &rarr; marts sobre o Postgres do <span class="mono">toolData_postgre</span>, com testes de schema (unique, not_null, accepted_values) e uma macro Jinja reutiliz&aacute;vel. Projeto pra fechar na pr&aacute;tica um gap real: nunca tinha usado dbt antes.</p>
@@ -1035,7 +330,7 @@
 
   <section id="projetos">
     <div class="section-head">
-      <span class="tag">./homelab</span>
+      <span class="section-num">04</span>
       <h2>projetos pessoais</h2>
     </div>
 
@@ -1043,8 +338,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_pokemon/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_pokemon/</span>
         </div>
         <h3>Pok&eacute;mon Explorer</h3>
         <p>Explorador 100% est&aacute;tico &mdash; sem build, sem servidor &mdash; consumindo a PokéAPI direto do navegador. Fichas por gera&ccedil;&atilde;o e jogo, calculadora de efetividade dual-type e montagem de time com efetividade combinada.</p>
@@ -1059,8 +353,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_tcg-pokemon/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_tcg-pokemon/</span>
         </div>
         <h3>Living Dex &mdash; TCG Pok&eacute;mon</h3>
         <p>Fich&aacute;rio digital para uma cole&ccedil;&atilde;o f&iacute;sica de cartas: uma carta por forma colecion&aacute;vel, cruzando a PokéAPI com a Pok&eacute;mon TCG API. Fich&aacute;rios f&iacute;sicos com posi&ccedil;&atilde;o em grade 3&times;3, status por forma, gr&aacute;ficos de progresso.</p>
@@ -1075,8 +368,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_idle/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_idle/</span>
         </div>
         <h3>Idle Miner Tycoon &mdash; Tracker</h3>
         <p>Painel para o jogo Idle Miner Tycoon: produ&ccedil;&atilde;o, pr&oacute;ximo prest&iacute;gio e gargalo de extra&ccedil;&atilde;o por ilha, simulador de pacotes promocionais e a nota&ccedil;&atilde;o de ordem de grandeza do pr&oacute;prio jogo (k, m, b &hellip; at&eacute; 10&sup7;&sup8;).</p>
@@ -1091,8 +383,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_reddit/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_reddit/</span>
         </div>
         <h3>Reddit Visual Viewer</h3>
         <p>Visualizador de posts do Reddit focado em imagem e v&iacute;deo, com lista de subreddits favoritos e visibilidade configur&aacute;vel por subreddit, persistida em MySQL.</p>
@@ -1107,8 +398,7 @@
 
       <article class="card">
         <div class="card-top">
-          <span class="slug mono">app_serverhub/</span>
-          <span class="status">up · público</span>
+          <span class="slug">app_serverhub/</span>
         </div>
         <h3>Server Hub</h3>
         <p>Central de links pessoal para organizar o pr&oacute;prio home lab: categorias, tags, busca com debounce e tema claro / escuro / autom&aacute;tico.</p>
@@ -1126,7 +416,7 @@
 
   <section id="sobre">
     <div class="section-head">
-      <span class="tag">./sobre</span>
+      <span class="section-num">05</span>
       <h2>como eu trabalho</h2>
     </div>
     <p class="about">
@@ -1140,7 +430,7 @@
 
   <footer>
     <div class="who">
-      <div class="name mono">Alexandre Losano</div>
+      <div class="name">Alexandre Losano</div>
       <div class="tagline">constru&iacute;do sobre docker-compose.yml</div>
     </div>
     <div class="links">
@@ -1148,8 +438,6 @@
       <a href="https://github.com/AlexandreLosano" target="_blank" rel="noopener">github.com/AlexandreLosano</a>
     </div>
   </footer>
-
-  <p class="eof">// EOF &middot; publicado a partir do pr&oacute;prio VPS</p>
 
 </div>
 
@@ -1161,65 +449,8 @@
   </div>
 </div>
 
-<script>
-  (function () {
-    var btn = document.getElementById('exp-more-btn');
-    var label = document.getElementById('exp-more-btn-label');
-    var panel = document.getElementById('exp-more');
-    if (!btn || !panel) return;
-    btn.addEventListener('click', function () {
-      var expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      panel.hidden = expanded;
-      label.textContent = expanded ? 'ver experiências anteriores' : 'ocultar experiências anteriores';
-    });
-  })();
+<script src="js/exp-toggle.js" defer></script>
+<script src="js/exp-modal.js" defer></script>
 
-  (function () {
-    var overlay = document.getElementById('exp-modal');
-    var meta = document.getElementById('exp-modal-meta');
-    var body = document.getElementById('exp-modal-body');
-    var closeBtn = document.getElementById('exp-modal-close');
-    if (!overlay || !body) return;
-
-    var lastTrigger = null;
-
-    function openModal(role) {
-      var company = role.closest('.exp-company');
-      var companyName = company ? company.querySelector('.company-name').textContent : '';
-      var period = role.querySelector('.period');
-      meta.textContent = companyName + (period ? ' · ' + period.textContent : '');
-      body.innerHTML = '';
-      body.appendChild(role.querySelector('.role-body').cloneNode(true));
-      overlay.hidden = false;
-      document.body.style.overflow = 'hidden';
-      lastTrigger = role;
-      closeBtn.focus();
-    }
-
-    function closeModal() {
-      overlay.hidden = true;
-      document.body.style.overflow = '';
-      body.innerHTML = '';
-      if (lastTrigger) lastTrigger.focus();
-    }
-
-    document.querySelectorAll('.exp-role').forEach(function (role) {
-      role.addEventListener('click', function () { openModal(role); });
-      role.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal(role);
-        }
-      });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closeModal();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !overlay.hidden) closeModal();
-    });
-  })();
-</script>
+</body>
+</html>

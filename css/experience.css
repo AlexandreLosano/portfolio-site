@@ -1,0 +1,186 @@
+/* Listagem de experiência: só período + cargo aparecem aqui — local,
+   bullets, destaques e pills moram no modal (ver css/modal.css e
+   js/exp-modal.js), clonados do mesmo .role-body. */
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exp-company {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.exp-head .company-name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.exp-head .duration {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.exp-roles { padding: 0 20px; }
+
+.exp-role {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 6px 20px;
+  padding: 18px 0;
+  border-top: 1px dashed var(--line);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.exp-role:first-child { border-top: none; }
+
+.exp-role:hover, .exp-role:focus-visible {
+  background: var(--paper-raised);
+  outline: none;
+}
+
+.exp-role .period {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--teal);
+  white-space: nowrap;
+  padding-top: 3px;
+}
+
+.exp-role .role-body { min-width: 0; }
+
+.role-body .role-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+
+.exp-role .role-title::after {
+  content: "ver mais →";
+  margin-left: 10px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.exp-role:hover .role-title::after,
+.exp-role:focus-visible .role-title::after {
+  opacity: 1;
+  color: var(--copper);
+}
+
+.role-body .role-loc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 0 0 10px;
+}
+
+.role-body ul {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  color: var(--text-mid);
+  font-size: 0.94rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.role-highlight {
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  border-left: 2px solid var(--copper);
+  padding-left: 10px;
+  margin: 0 0 12px;
+}
+
+.role-highlight strong {
+  color: var(--text-hi);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.exp-role .role-body .role-loc,
+.exp-role .role-body ul,
+.exp-role .role-body .role-highlight,
+.exp-role .role-body .pills {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .exp-role {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+.exp-more-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--paper-raised);
+  border: 1px dashed var(--line);
+  color: var(--text-mid);
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 12px 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.exp-more-btn::before {
+  content: "+ ";
+  color: var(--copper);
+}
+
+.exp-more-btn[aria-expanded="true"]::before { content: "− "; }
+
+.exp-more-btn:hover, .exp-more-btn:focus-visible {
+  border-color: var(--copper);
+  color: var(--text-hi);
+}
+
+.exp-more-count {
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 560px) {
+  .exp-more-count { display: none; }
+}
+
+#exp-more {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+#exp-more:not([hidden]) { display: flex; }

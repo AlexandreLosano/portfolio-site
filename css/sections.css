@@ -1,0 +1,46 @@
+/* Cabeçalho de seção (numeração editorial em vez de path de terminal)
+   e o texto da seção "como eu trabalho". */
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.section-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--copper);
+}
+
+.section-head h2 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.section-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.about {
+  max-width: 60ch;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--text-mid);
+}
+
+.about strong {
+  color: var(--text-hi);
+  font-weight: 600;
+  font-style: normal;
+}

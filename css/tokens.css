@@ -1,0 +1,50 @@
+/* Paleta e tipografia — únicas variáveis do site, tema claro/escuro via
+   prefers-color-scheme (ou data-theme="light"/"dark" pra forçar um modo). */
+
+:root {
+  --paper: #eef1ee;
+  --paper-raised: #e2e7e2;
+  --line: #c9d1c8;
+  --text-hi: #12201f;
+  --text-mid: #445250;
+  --text-dim: #6f807a;
+  --copper: #b35a26;
+  --copper-strong: #8f4519;
+  --teal: #2f7d72;
+  --card-bg: #f6f7f3;
+  --shadow: 0 1px 0 rgba(16, 24, 26, 0.06);
+
+  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0d1516;
+    --paper-raised: #121c1d;
+    --line: #23302f;
+    --text-hi: #e7ece9;
+    --text-mid: #a9b7b2;
+    --text-dim: #6f827c;
+    --copper: #e08a4d;
+    --copper-strong: #f0a468;
+    --teal: #5cc2b2;
+    --card-bg: #10191a;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #0d1516;
+  --paper-raised: #121c1d;
+  --line: #23302f;
+  --text-hi: #e7ece9;
+  --text-mid: #a9b7b2;
+  --text-dim: #6f827c;
+  --copper: #e08a4d;
+  --copper-strong: #f0a468;
+  --teal: #5cc2b2;
+  --card-bg: #10191a;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
