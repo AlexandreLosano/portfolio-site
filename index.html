@@ -644,7 +644,7 @@
     </div>
     <p class="role">engenheiro de dados &mdash; fora do expediente, constrói e hospeda os próprios apps</p>
     <p class="lede">
-      No trabalho, constr&oacute;i pipelines &mdash; Airflow, Oracle, Redshift, Databricks. Fora do
+      No trabalho, constr&oacute;i pipelines &mdash; Airflow, Python, Oracle, Redshift, Databricks. Fora do
       expediente, cada ideia vira um servi&ccedil;o com seu pr&oacute;prio <code class="mono">docker-compose.yml</code>:
       React e TypeScript na interface, Node por tr&aacute;s, Postgres ou Mongo guardando o estado,
       tudo rodando no pr&oacute;prio home lab.
@@ -652,7 +652,7 @@
 
     <div class="stats">
       <div class="stat">
-        <div class="n">07</div>
+        <div class="n">08</div>
         <div class="label">projetos publicados</div>
       </div>
       <div class="stat">
@@ -682,18 +682,19 @@
         <div class="exp-roles">
 
           <div class="exp-role">
-            <span class="period">jul/2025 &ndash; atual</span>
+            <span class="period">jun/2025 &ndash; atual</span>
             <div class="role-body">
               <h3 class="role-title">Engenheiro de Dados</h3>
               <p class="role-loc">São Paulo, Brasil &middot; híbrido</p>
               <ul>
-                <li>Camada de dados do produto Command Center: dados near-real-time para os painéis de decis&atilde;o da equipe de Gest&atilde;o de Leitos, em parceria com o time full-stack</li>
-                <li>Pipelines via engenharia reversa e BDD sobre Oracle, Redshift e Databricks</li>
-                <li>Queries e DAGs no Airflow, versionadas com Git e vinculadas ao Azure DevOps</li>
+                <li>Pipeline completa do Command Center: extra&ccedil;&atilde;o no Oracle, tipagem via pandas com schema em JSON, carga no S3 e cria&ccedil;&atilde;o/atualiza&ccedil;&atilde;o autom&aacute;tica das tabelas no Athena &mdash; dados near-real-time pros pain&eacute;is de decis&atilde;o da Gest&atilde;o de Leitos</li>
+                <li>Pipelines em Python/PySpark no Databricks e sobre Oracle/Redshift, do modelamento &agrave; entrega pro backend</li>
+                <li>DAGs em Python no Airflow, versionadas com Git e vinculadas ao Azure DevOps</li>
+                <li>Notifica&ccedil;&otilde;es via webhook: alerta de falha de DAG no Google Chat e confirma&ccedil;&atilde;o de carga pro backend full-stack</li>
               </ul>
               <p class="role-highlight"><strong>Destaques:</strong> refez a camada de dados do Command Center reduzindo custos; migrou o Airflow de 1.10 pra 2.10, refatorando as DAGs e dimensionando uma inst&acirc;ncia EC2 sob medida &mdash; mais economia e poder de execu&ccedil;&atilde;o.</p>
               <div class="pills">
-                <span class="pill">Oracle</span><span class="pill">Redshift</span><span class="pill">Databricks</span><span class="pill">Apache Airflow</span><span class="pill">AWS</span><span class="pill">Azure DevOps</span><span class="pill">Git</span>
+                <span class="pill">Python</span><span class="pill">Oracle</span><span class="pill">Redshift</span><span class="pill">Databricks</span><span class="pill">Amazon S3</span><span class="pill">Amazon Athena</span><span class="pill">Apache Airflow</span><span class="pill">AWS</span><span class="pill">Azure DevOps</span><span class="pill">Git</span>
               </div>
             </div>
           </div>
@@ -705,10 +706,10 @@
               <ul>
                 <li>Relatórios e indicadores de resultado para a diretoria, com dashboards em Power BI (arquivos, SharePoint, Redshift)</li>
                 <li>Apoio à elabora&ccedil;&atilde;o de or&ccedil;amento e relat&oacute;rios de custo/desvio</li>
-                <li>Transi&ccedil;&atilde;o gradual pra engenharia de dados: queries e DAGs no Airflow sobre Oracle/Redshift</li>
+                <li>Transi&ccedil;&atilde;o gradual pra engenharia de dados: queries e DAGs em Python no Airflow sobre Oracle/Redshift</li>
               </ul>
               <div class="pills">
-                <span class="pill">Power BI</span><span class="pill">Oracle</span><span class="pill">Redshift</span><span class="pill">Apache Airflow</span><span class="pill">Excel/VBA</span><span class="pill">SharePoint</span><span class="pill">NoSQL</span>
+                <span class="pill">Power BI</span><span class="pill">Oracle</span><span class="pill">Redshift</span><span class="pill">Apache Airflow</span><span class="pill">Python</span><span class="pill">Excel/VBA</span><span class="pill">SharePoint</span><span class="pill">NoSQL</span>
               </div>
             </div>
           </div>
@@ -921,6 +922,22 @@
         <div class="card-foot">
           <span class="runtime">docker compose &middot; porta 4000</span>
           <a class="repo-link" href="https://github.com/AlexandreLosano/ser_grafana" target="_blank" rel="noopener">→ repositório</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="slug mono">app_dbt/</span>
+          <span class="status">up · público</span>
+        </div>
+        <h3>Estudo de dbt</h3>
+        <p>Seed de vendas fict&iacute;cia transformada em camadas staging &rarr; marts sobre o Postgres do <span class="mono">toolData_postgre</span>, com testes de schema (unique, not_null, accepted_values) e uma macro Jinja reutiliz&aacute;vel. Projeto pra fechar na pr&aacute;tica um gap real: nunca tinha usado dbt antes.</p>
+        <div class="pills">
+          <span class="pill">dbt</span><span class="pill">PostgreSQL</span><span class="pill">SQL</span><span class="pill">Docker</span>
+        </div>
+        <div class="card-foot">
+          <span class="runtime">docker compose run --rm dbt</span>
+          <a class="repo-link" href="https://github.com/AlexandreLosano/app_dbt" target="_blank" rel="noopener">→ repositório</a>
         </div>
       </article>
 
