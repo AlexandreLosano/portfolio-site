@@ -441,9 +441,6 @@
     margin: 0 0 16px;
   }
 
-  .modal-box .role-title, .modal-box .role-loc { margin: 0 0 4px; }
-  .modal-box .role-loc { margin-bottom: 10px; }
-
   .exp-role .period {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.78rem;
@@ -454,20 +451,20 @@
 
   .exp-role .role-body { min-width: 0; }
 
-  .exp-role .role-title {
+  .role-body .role-title {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
     font-size: 0.98rem;
     margin: 0 0 4px;
   }
 
-  .exp-role .role-loc {
+  .role-body .role-loc {
     font-size: 0.8rem;
     color: var(--text-dim);
     margin: 0 0 10px;
   }
 
-  .exp-role ul {
+  .role-body ul {
     margin: 0 0 12px;
     padding-left: 18px;
     color: var(--text-mid);
@@ -477,7 +474,7 @@
     gap: 5px;
   }
 
-  .exp-role .role-highlight {
+  .role-highlight {
     font-size: 0.9rem;
     color: var(--text-mid);
     border-left: 2px solid var(--copper);
@@ -485,12 +482,21 @@
     margin: 0 0 12px;
   }
 
-  .exp-role .role-highlight strong {
+  .role-highlight strong {
     color: var(--text-hi);
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
+  }
+
+  /* Na listagem, só período + cargo aparecem — local, bullets, destaques
+     e pills moram no modal, clonado do mesmo .role-body. */
+  .exp-role .role-body .role-loc,
+  .exp-role .role-body ul,
+  .exp-role .role-body .role-highlight,
+  .exp-role .role-body .pills {
+    display: none;
   }
 
   @media (max-width: 560px) {
