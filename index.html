@@ -1,4 +1,5 @@
-<title>app_losano</title>
+<meta charset="utf-8">
+<title>Portifólio - Alexandre Losano</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
@@ -357,9 +358,91 @@
     gap: 6px 20px;
     padding: 18px 0;
     border-top: 1px dashed var(--line);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
   }
 
   .exp-role:first-child { border-top: none; }
+
+  .exp-role:hover, .exp-role:focus-visible {
+    background: var(--paper-raised);
+    outline: none;
+  }
+
+  .exp-role .role-title::after {
+    content: "→ detalhes";
+    margin-left: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease;
+  }
+
+  .exp-role:hover .role-title::after,
+  .exp-role:focus-visible .role-title::after {
+    opacity: 1;
+    color: var(--copper);
+  }
+
+  /* ---------- modal ---------- */
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 24, 26, 0.55);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .modal-overlay[hidden] { display: none; }
+
+  .modal-box {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    max-width: 600px;
+    width: 100%;
+    padding: 30px 26px 26px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text-mid);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .modal-close:hover, .modal-close:focus-visible {
+    border-color: var(--copper);
+    color: var(--text-hi);
+  }
+
+  .modal-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin: 0 0 16px;
+  }
+
+  .modal-box .role-title, .modal-box .role-loc { margin: 0 0 4px; }
+  .modal-box .role-loc { margin-bottom: 10px; }
 
   .exp-role .period {
     font-family: 'IBM Plex Mono', monospace;
@@ -681,7 +764,7 @@
         </div>
         <div class="exp-roles">
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">jun/2025 &ndash; atual</span>
             <div class="role-body">
               <h3 class="role-title">Engenheiro de Dados</h3>
@@ -699,7 +782,7 @@
             </div>
           </div>
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">nov/2020 &ndash; jun/2025</span>
             <div class="role-body">
               <h3 class="role-title">Analista de Informações Gerenciais PL</h3>
@@ -714,7 +797,7 @@
             </div>
           </div>
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">jan/2017 &ndash; nov/2020</span>
             <div class="role-body">
               <h3 class="role-title">Analista de Contas a Receber</h3>
@@ -745,7 +828,7 @@
         </div>
         <div class="exp-roles">
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">abr/2014 &ndash; nov/2016</span>
             <div class="role-body">
               <h3 class="role-title">Analista de Planejamento</h3>
@@ -770,7 +853,7 @@
         </div>
         <div class="exp-roles">
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">mai/2012 &ndash; nov/2013</span>
             <div class="role-body">
               <h3 class="role-title">Analista Comercial</h3>
@@ -784,7 +867,7 @@
             </div>
           </div>
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">jan/2011 &ndash; abr/2012</span>
             <div class="role-body">
               <h3 class="role-title">Assistente de Marketing</h3>
@@ -807,7 +890,7 @@
         </div>
         <div class="exp-roles">
 
-          <div class="exp-role">
+          <div class="exp-role" tabindex="0" role="button" aria-haspopup="dialog">
             <span class="period">jan/2009 &ndash; dez/2010</span>
             <div class="role-body">
               <h3 class="role-title">Estagi&aacute;rio de TI</h3>
@@ -1041,12 +1124,11 @@
       <h2>como eu trabalho</h2>
     </div>
     <p class="about">
-      No trabalho, busco sempre a op&ccedil;&atilde;o mais adequada para a empresa: velocidade,
-      veracidade dos dados, confiabilidade e economia. Os projetos pessoais funcionam como um
-      laborat&oacute;rio, servindo para o teste de ideias e a constru&ccedil;&atilde;o de
-      ferramentas com tecnologias conhecidas para resolver um problema de forma pr&aacute;tica e
-      que envolva o estudo cont&iacute;nuo, com o objetivo de desenvolver novos racioc&iacute;nios
-      e a descoberta de novos caminhos e tecnologias.
+      No trabalho, a prioridade muda com o problema: &agrave;s vezes &eacute; entregar r&aacute;pido,
+      &agrave;s vezes &eacute; garantir que o dado est&aacute; certo, &agrave;s vezes &eacute; s&oacute;
+      n&atilde;o deixar a conta da AWS subir. Os projetos pessoais n&atilde;o t&ecirc;m esse tipo de
+      press&atilde;o &mdash; servem pra testar ferramenta que eu nunca usei, errar sem custar nada e
+      confirmar na pr&aacute;tica se o que aprendi lendo documenta&ccedil;&atilde;o realmente funciona.
     </p>
   </section>
 
@@ -1065,6 +1147,14 @@
 
 </div>
 
+<div class="modal-overlay" id="exp-modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Detalhes da experi&ecirc;ncia">
+    <button type="button" class="modal-close" id="exp-modal-close" aria-label="Fechar">&times;</button>
+    <p class="modal-meta mono" id="exp-modal-meta"></p>
+    <div id="exp-modal-body"></div>
+  </div>
+</div>
+
 <script>
   (function () {
     var btn = document.getElementById('exp-more-btn');
@@ -1076,6 +1166,54 @@
       btn.setAttribute('aria-expanded', String(!expanded));
       panel.hidden = expanded;
       label.textContent = expanded ? 'ver experiências anteriores' : 'ocultar experiências anteriores';
+    });
+  })();
+
+  (function () {
+    var overlay = document.getElementById('exp-modal');
+    var meta = document.getElementById('exp-modal-meta');
+    var body = document.getElementById('exp-modal-body');
+    var closeBtn = document.getElementById('exp-modal-close');
+    if (!overlay || !body) return;
+
+    var lastTrigger = null;
+
+    function openModal(role) {
+      var company = role.closest('.exp-company');
+      var companyName = company ? company.querySelector('.company-name').textContent : '';
+      var period = role.querySelector('.period');
+      meta.textContent = companyName + (period ? ' · ' + period.textContent : '');
+      body.innerHTML = '';
+      body.appendChild(role.querySelector('.role-body').cloneNode(true));
+      overlay.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lastTrigger = role;
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+      body.innerHTML = '';
+      if (lastTrigger) lastTrigger.focus();
+    }
+
+    document.querySelectorAll('.exp-role').forEach(function (role) {
+      role.addEventListener('click', function () { openModal(role); });
+      role.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(role);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !overlay.hidden) closeModal();
     });
   })();
 </script>
