@@ -18,5 +18,6 @@
 
 ## Certificaçao 
 
+- Astronomer Certification for Apache Airflow 3 Fundamentals em 10/2026
 - AWS Certified Cloud Practitioner em 2024
 - Excel Expert em   2022
